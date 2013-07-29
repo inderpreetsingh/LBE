@@ -44,6 +44,8 @@ public:
 	LakaEngine(const WEnvironment &env);
 	//! Loads the authentication forms viz Registeration form, Lost Password Form, Login Form.
 	void authFormLoader();
+        //! Handles the change in internal Path
+        void handlePathChange();
 	
 private:
 	//! Checks whether authPushButton is clicked or not?
