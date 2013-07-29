@@ -7,26 +7,29 @@
 
 ***************************************************************/
 #include "laka_engine.h"
-#include <Wt/WLink>
 
-static const string url = "/laka";
+#include <Wt/WLink>
+#include <Wt/WStackedWidget>
 
 LakaEngine::LakaEngine(const WEnvironment &env)
     :WApplication(env)
 {
-   container = new WContainerWidget(root());
-   container->setStyleClass("container");
+   stack = new WStackedWidget(root());
+   stack->setStyleClass("stack");
    
    useStyleSheet("resources/default.css");
 
    clicked = false;
    
-   authButton = new WPushButton("Login/Register",container);
-   authButton->setLink(WLink(WLink::InternalPath, "/login.lml"));
+   postLoop = new PostLoop(stack);
+   authForm = new AuthForm(stack);
 
-   postLoop = new PostLoop(container);
- 
-   internalPathChanged().connect(this, &LakaEngine::handlePathChange); 	
+   authButton = new WPushButton("Login/Register",root());
+   authButton->setLink(WLink(WLink::InternalPath, "/login.lml"));
+   
+   handlePathChange();
+   
+   internalPathChanged().connect(this, &LakaEngine::handlePathChange);
 }
 
 void LakaEngine::handlePathChange()
@@ -34,15 +37,23 @@ void LakaEngine::handlePathChange()
     std::string path = internalPath();
     if(path == "/login.lml")
       authFormLoader();
+    else
+      posts();
+}
+
+void LakaEngine::posts()
+{
+   stack->setCurrentWidget(postLoop);
+   clicked = false;
 }
 
 void LakaEngine::authFormLoader()
 {
-    if (clicked == false)
+    if (!clicked)
      {
 	clicked = true;
-        new AuthForm(container);
-      }
+        stack->setCurrentWidget(authForm);
+     }
 }
 
 WApplication *createApplication(const WEnvironment &env)
@@ -57,7 +68,7 @@ int main(int argc, char **argv)
 		Wt::WServer server(argv[0]);
 
 		server.setServerConfiguration(argc,argv, WTHTTP_CONFIGURATION);
-		server.addEntryPoint(Wt::Application, createApplication, url);
+		server.addEntryPoint(Wt::Application, createApplication, "");
 
 		Session::configureAuth();
 
@@ -70,5 +81,5 @@ int main(int argc, char **argv)
 	} catch (std::exception &e) {
 		std::cerr<< "exception" << e.what() <<std::endl;
 	}
-}
+ }
 

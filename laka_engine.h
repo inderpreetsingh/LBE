@@ -46,14 +46,18 @@ public:
 	void authFormLoader();
         //! Handles the change in internal Path
         void handlePathChange();
+        //! Loads the published posts
+        void posts();
 	
 private:
 	//! Checks whether authPushButton is clicked or not?
-	bool clicked; 
+	bool clicked;
 	//! The Grand Parent Widget for all the widgets inside LakaEngine.
-	WContainerWidget *container;
+	WStackedWidget *stack;
 	//! The authPushButton that invokes authentication forms.
 	WPushButton *authButton;
+        //! Form for Authentication
+        AuthForm *authForm;
 	//! Post loop loads all the posts from the database. 
 	PostLoop *postLoop;
 };

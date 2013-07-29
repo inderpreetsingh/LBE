@@ -27,4 +27,4 @@ clean:
 	 rm -rf *.o laka
 
 run:
-	./laka --docroot . --http-address 0.0.0.0 --http-port 1313                                                     
+	./laka --docroot=".;/admin, /epiceditor, /resources, /themes"  --http-address 0.0.0.0 --http-port 1313                                                     
