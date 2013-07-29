@@ -32,8 +32,10 @@ class PostLoop : public Wt::WContainerWidget
 public:
 	
 	PostLoop(Wt::WContainerWidget * parent);
+	//! theLoop is the main loop that traverses through all the posts in the blog.
 	void theLoop();
 private:
+	//! allPosts is a container where all the posts are stored
 	PostCollection allPosts;
 };
 #endif
