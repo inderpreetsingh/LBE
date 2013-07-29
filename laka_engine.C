@@ -14,9 +14,11 @@
 LakaEngine::LakaEngine(const WEnvironment &env)
     :WApplication(env)
 {
+   container = new WContainerWidget(root());
    container->setStyleClass("container");
    useStyleSheet("resources/default.css");
 
+   clicked = false;
    authButton = new WPushButton("Login/Register",container);
    authButton->clicked().connect(this, &LakaEngine::authFormLoader);
 

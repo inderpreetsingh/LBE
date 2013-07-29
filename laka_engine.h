@@ -47,9 +47,9 @@ public:
 	
 private:
 	//! Checks whether authPushButton is clicked or not?
-	bool clicked = false; 
+	bool clicked; 
 	//! The Grand Parent Widget for all the widgets inside LakaEngine.
-	WContainerWidget *container = new WContainerWidget(root());
+	WContainerWidget *container;
 	//! The authPushButton that invokes authentication forms.
 	WPushButton *authButton;
 	//! Post loop loads all the posts from the database. 
