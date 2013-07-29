@@ -10,6 +10,7 @@
 
 ***************************************************************/
 #include "laka_engine.h"
+#include "admin/post_pad.h"
 
 LakaEngine::LakaEngine(const WEnvironment &env)
     :WApplication(env)
@@ -21,7 +22,7 @@ LakaEngine::LakaEngine(const WEnvironment &env)
    clicked = false;
    authButton = new WPushButton("Login/Register",container);
    authButton->clicked().connect(this, &LakaEngine::authFormLoader);
-
+   PostPad *postPad = new PostPad(container);
    postLoop = new PostLoop(container);       
 	
 }

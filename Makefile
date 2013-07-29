@@ -1,8 +1,8 @@
 
 all: laka 
 
-laka:	session.o laka_engine.o auth.o user.o post_loop.o
-	g++ session.o laka_engine.o auth.o user.o post_loop.o -o laka  -I/usr/local/include -L/usr/local/lib -lwthttp -lwt -lboost_regex -lboost_signals -lboost_system -lboost_thread -lboost_filesystem -lboost_date_time -lwtdbo -lwtdbosqlite3
+laka:	session.o laka_engine.o auth.o user.o post_loop.o post_pad.o
+	g++ session.o laka_engine.o auth.o user.o post_loop.o post_pad.o -o laka  -I/usr/local/include -L/usr/local/lib -lwthttp -lwt -lboost_regex -lboost_signals -lboost_system -lboost_thread -lboost_filesystem -lboost_date_time -lwtdbo -lwtdbosqlite3
 
 session.o: session.C
 	g++ -Wall -std=c++0x -c session.C
@@ -19,6 +19,9 @@ user.o: user.C
 
 post_loop.o: post_loop.C
 	g++ -Wall -std=c++0x -c post_loop.C
+
+post_pad.o: admin/post_pad.C
+	g++ -Wall -std=c++0x -c admin/post_pad.C
 
 clean:
 	 rm -rf *.o laka
