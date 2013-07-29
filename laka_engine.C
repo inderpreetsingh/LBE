@@ -1,7 +1,4 @@
-/***************************************************************
-
- Filename: laka_engine.C
-
+/************************************************************** 
  Purpose : main app file of Laka Engine 
 
  Author  : Gauravjeet Singh, Inderpreet Singh, Shaina Sabarwal
@@ -10,21 +7,33 @@
 
 ***************************************************************/
 #include "laka_engine.h"
-#include "admin/post_pad.h"
+#include <Wt/WLink>
+
+static const string url = "/laka";
 
 LakaEngine::LakaEngine(const WEnvironment &env)
     :WApplication(env)
 {
    container = new WContainerWidget(root());
    container->setStyleClass("container");
+   
    useStyleSheet("resources/default.css");
 
    clicked = false;
+   
    authButton = new WPushButton("Login/Register",container);
-   authButton->clicked().connect(this, &LakaEngine::authFormLoader);
-   PostPad *postPad = new PostPad(container);
-   postLoop = new PostLoop(container);       
-	
+   authButton->setLink(WLink(WLink::InternalPath, "/login.lml"));
+
+   postLoop = new PostLoop(container);
+ 
+   internalPathChanged().connect(this, &LakaEngine::handlePathChange); 	
+}
+
+void LakaEngine::handlePathChange()
+{
+    std::string path = internalPath();
+    if(path == "/login.lml")
+      authFormLoader();
 }
 
 void LakaEngine::authFormLoader()
@@ -35,7 +44,6 @@ void LakaEngine::authFormLoader()
         new AuthForm(container);
       }
 }
-
 
 WApplication *createApplication(const WEnvironment &env)
 {
@@ -49,7 +57,7 @@ int main(int argc, char **argv)
 		Wt::WServer server(argv[0]);
 
 		server.setServerConfiguration(argc,argv, WTHTTP_CONFIGURATION);
-		server.addEntryPoint(Wt::Application, createApplication);
+		server.addEntryPoint(Wt::Application, createApplication, url);
 
 		Session::configureAuth();
 
