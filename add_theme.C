@@ -1,0 +1,25 @@
+/*******************************************************
+
+FileName: add_theme.C
+
+Description: Holds the definition of function to 
+             read theme file
+
+Author: Shaina Sabarwal, Inderpreet Singh, Gauravjeet Singh
+
+License GNU GPL V3
+
+***********************************************************/
+
+#include "add_theme.h"
+
+//!definition of handleThemeFile function.
+/*!
+The function handleThemeFile reads the content of file themes/yanni/loop.lml and put it into a string tempText.
+*/
+void handleThemeFile() 
+{
+	ifstream f("themes/yanni/loop.lml");
+	getline(f, tempText, '\0');
+}
+

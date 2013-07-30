@@ -13,7 +13,9 @@ License GNU GPL V3
 #include "post.h"
 #include "post_loop.h"
 #include "global.h"
+#include "add_theme.h"
 
+string tempText;
 PostLoop::PostLoop(WContainerWidget *parent)
     :WContainerWidget(parent)
 {
@@ -38,8 +40,7 @@ PostLoop::PostLoop(WContainerWidget *parent)
 
 void PostLoop::theLoop()
 {
-     auto tempText="<div class=\"post-title\"> ${post-title} </div> <div class =\"post-content\"> ${post-content} </div>";
-     
+     handleThemeFile();
      for (auto i:allPosts)
 	{
 	  WTemplate* loop = new WTemplate(this);
