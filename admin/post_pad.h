@@ -17,6 +17,7 @@ License: GNU GPL V3
 #include <Wt/WContainerWidget>
 #include <Wt/WPushButton>
 #include <Wt/WApplication>
+#include <Wt/WLineEdit>
 
 #include <sstream>
 
@@ -29,6 +30,7 @@ public:
     void storePost();
 private:
     WContainerWidget *postEditor;
+    WLineEdit *postTitle;
     WPushButton *submitPost;
     std::stringstream strm; 
     bool clicked;

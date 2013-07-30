@@ -18,7 +18,7 @@ License GNU GPL V3
 string tempText;
 PostLoop::PostLoop(WContainerWidget *parent)
     :WContainerWidget(parent)
-{
+{/*
     {
       dbo::Transaction T(session_);
       Post *post = new Post();
@@ -27,7 +27,7 @@ PostLoop::PostLoop(WContainerWidget *parent)
       dbo::ptr<Post> newPost = session_.add(post);
       T.commit();
     }
-
+*/
     {
       dbo::Transaction T(session_);
       allPosts = session_.find<Post>();

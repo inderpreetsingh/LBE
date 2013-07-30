@@ -11,6 +11,7 @@ License: GNU GPL V3
 *************************************************************/
 
 #include "post_pad.h"
+#include "../post.h"
 
 PostPad :: PostPad (WContainerWidget *parent)
         : WContainerWidget(parent)
@@ -18,6 +19,10 @@ PostPad :: PostPad (WContainerWidget *parent)
     WApplication::instance()->require("../resources/epic_editor/js/epiceditor.js");
     strm<<"var editor = new EpicEditor().load();";
     WApplication::instance()->doJavaScript(strm.str());
+
+    postTitle = new WLineEdit(this);
+    postTitle->setEmptyText("Title of post");
+
     postEditor = new WContainerWidget(this);
     postEditor->setId("epiceditor");    
     submitPost = new WPushButton("Submit", this);

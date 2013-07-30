@@ -14,6 +14,7 @@
 LakaEngine::LakaEngine(const WEnvironment &env)
     :WApplication(env)
 {
+   setCssTheme("bootstrap");
    stack = new WStackedWidget(root());
    stack->setStyleClass("stack");
    
