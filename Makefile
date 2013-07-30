@@ -29,4 +29,4 @@ clean:
 	 rm -rf *.o laka
 
 run:
-	./laka --docroot=".;/admin, /epiceditor, /resources, /resources/epic_editor, /resources/epic_editor/js, /resources/epic_editor/images, /resources/epic_editor/themes, /resources/epic_editor/themes/base, /resources/epic_editor/themes/editor, /resources/epic_editor/themes/preview, /themes"  --http-address 0.0.0.0 --http-port 1313                                                     
+	./laka --docroot . --http-address 0.0.0.0 --http-port 1313 

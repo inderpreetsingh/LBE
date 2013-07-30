@@ -15,7 +15,7 @@ License: GNU GPL V3
 PostPad :: PostPad (WContainerWidget *parent)
         : WContainerWidget(parent)
 {
-    WApplication::instance()->require("../resources/epic_editor/js/epiceditor.min.js");
+    WApplication::instance()->require("../resources/epic_editor/js/epiceditor.js");
     strm<<"var editor = new EpicEditor().load();";
     WApplication::instance()->doJavaScript(strm.str());
     postEditor = new WContainerWidget(this);
