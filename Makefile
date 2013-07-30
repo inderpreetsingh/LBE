@@ -8,7 +8,7 @@ session.o: session.C
 	g++ -Wall -std=c++0x -c session.C
 
 laka_engine.o: laka_engine.C
-	g++ -Wall -std=c++0x  -c laka_engine.C
+	g++ -Wall -std=c++0x -c laka_engine.C
 
 auth.o: auth.C
 	g++ -Wall -std=c++0x -c auth.C
@@ -29,4 +29,4 @@ clean:
 	 rm -rf *.o laka
 
 run:
-	./laka --docroot=".;/admin, /epiceditor, /resources, /themes"  --http-address 0.0.0.0 --http-port 1313                                                     
+	./laka --docroot=".;/admin, /epiceditor, /resources, /resources/epic_editor, /resources/epic_editor/js, /resources/epic_editor/images, /resources/epic_editor/themes, /resources/epic_editor/themes/base, /resources/epic_editor/themes/editor, /resources/epic_editor/themes/preview, /themes"  --http-address 0.0.0.0 --http-port 1313                                                     

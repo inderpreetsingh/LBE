@@ -30,7 +30,7 @@ public:
 private:
     WContainerWidget *postEditor;
     WPushButton *submitPost;
-    std::stringstream strm;    
+    std::stringstream strm; 
     bool clicked;
 };
 #endif

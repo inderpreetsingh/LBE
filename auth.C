@@ -39,7 +39,7 @@ AuthForm::AuthForm(WContainerWidget *parent)
 	if(session_.login().loggedIn()){
 		Wt::log("notice") << "User" << session_.login().user().id()
 					<<"logged in.";
-            PostPad *postPad = new PostPad(this);		
+            PostPad *postPad = new PostPad(this);
 	}
 	else
 		Wt::log("notice") << "User logged out.";
