@@ -18,8 +18,8 @@ License GNU GPL V3
 string tempText;
 PostLoop::PostLoop(WContainerWidget *parent)
     :WContainerWidget(parent)
-{/*
-    {
+{
+/*   {
       dbo::Transaction T(session_);
       Post *post = new Post();
       post->postName = "Title goes here";

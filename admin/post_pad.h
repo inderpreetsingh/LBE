@@ -18,21 +18,31 @@ License: GNU GPL V3
 #include <Wt/WPushButton>
 #include <Wt/WApplication>
 #include <Wt/WLineEdit>
+#include <Wt/WJavaScript>
 
 #include <sstream>
+
+#include "../post.h"
+#include "../global.h"
 
 using namespace Wt;
 
 class PostPad : public WContainerWidget
 {
+
 public:
     PostPad(WContainerWidget *parent);
-    void storePost();
+    void storePost(std::string postContent);
+    void getPost();
 private:
     WContainerWidget *postEditor;
     WLineEdit *postTitle;
     WPushButton *submitPost;
+    
+    JSignal<std::string> postContent;
+
     std::stringstream strm; 
     bool clicked;
+
 };
 #endif

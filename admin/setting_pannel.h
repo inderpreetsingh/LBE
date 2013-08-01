@@ -17,7 +17,7 @@ License: GNU GPL V3
 #include <Wt/WContainerWidget>
 #include <Wt/WLineEdit>
 #include <Wt/WPushButton>
-
+#include  <Wt/WText>
 using namespace Wt;
 
 //! Strings for storing the title and tagline

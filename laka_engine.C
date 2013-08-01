@@ -7,6 +7,7 @@
 
 ***************************************************************/
 #include "laka_engine.h"
+#include "admin/setting_pannel.h"
 
 #include <Wt/WLink>
 #include <Wt/WStackedWidget>
@@ -14,7 +15,9 @@
 LakaEngine::LakaEngine(const WEnvironment &env)
     :WApplication(env)
 {
-   setCssTheme("bootstrap");
+   setTitle(titleString);
+   new WText(taglineString, root());
+
    stack = new WStackedWidget(root());
    stack->setStyleClass("stack");
    
@@ -53,6 +56,7 @@ void LakaEngine::authFormLoader()
     if (!clicked)
      {
 	clicked = true;
+         root()->removeWidget(authButton);
         stack->setCurrentWidget(authForm);
      }
 }

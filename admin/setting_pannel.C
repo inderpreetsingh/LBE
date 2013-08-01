@@ -11,6 +11,7 @@ License: GNU GPL V3
 *************************************************************/
 
 #include "setting_pannel.h"
+#include <Wt/WBreak>
 
 std::string titleString, taglineString;
 
@@ -18,11 +19,13 @@ settingPannel::settingPannel(WContainerWidget *parent):WContainerWidget(parent)
 {
   settingContainer = new WContainerWidget(this);
 
-  new WText("Title of Blog: ", this);
+  new WText("Title of Blog: ", settingContainer);
   title = new WLineEdit(settingContainer); 
 //  title->setEmptyText("some catchy title");
+
+  settingContainer->addWidget(new WBreak());
   
-  new WText("Tagline of Blog: ", this);
+  new WText("Tagline of Blog: ", settingContainer);
   tagline = new WLineEdit(settingContainer);
 //  tagline->setEmptyText("Some cheesy tagline");
 
@@ -36,4 +39,3 @@ void settingPannel::saveSettings()
   taglineString = tagline->text().toUTF8();
   new WText("Settings saved", this);
 }
-  
