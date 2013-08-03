@@ -8,57 +8,65 @@
 ***************************************************************/
 #include "laka_engine.h"
 #include "admin/setting_pannel.h"
+#include "add_theme.h"
 
 #include <Wt/WLink>
 #include <Wt/WStackedWidget>
 
+string mainTemplate;
+
 LakaEngine::LakaEngine(const WEnvironment &env)
     :WApplication(env)
 {
+   if(titleString == "")
+   titleString = "Laka";
+
+   if(taglineString == "")
+   taglineString="Just another awesome blog";
+   
    setTitle(titleString);
-   new WText(taglineString, root());
-
-   stack = new WStackedWidget(root());
-   stack->setStyleClass("stack");
-   
    useStyleSheet("resources/default.css");
-
    clicked = false;
-   
-   postLoop = new PostLoop(stack);
-   authForm = new AuthForm(stack);
 
-   authButton = new WPushButton("Login/Register",root());
-   authButton->setLink(WLink(WLink::InternalPath, "/login.lml"));
+   container = new WContainerWidget(root());
+   container->setStyleClass("container");
+
+   main = new WTemplate(root());
+
+   main->setTemplateText(mainTemplate);
+   main->bindString("tagline",    taglineString);
+   main->bindString("title",      titleString);
+
+   postLoop = new PostLoop(container);
+   main->bindWidget("postloop",   postLoop);
+
+   authButton = new WPushButton("Login/Register", root());
+   authButton->setLink(WLink(WLink::InternalPath, "/login"));
+
+   main->bindWidget("loginbutton",authButton);
    
    handlePathChange();
-   
    internalPathChanged().connect(this, &LakaEngine::handlePathChange);
 }
 
 void LakaEngine::handlePathChange()
 {
     std::string path = internalPath();
-    if(path == "/login.lml")
+    
+    if(path == "/login")
       authFormLoader();
-    else
-      posts();
-}
-
-void LakaEngine::posts()
-{
-   stack->setCurrentWidget(postLoop);
-   clicked = false;
+    else if(path == "/laka-admin")
+      container->removeWidget(postLoop);
 }
 
 void LakaEngine::authFormLoader()
 {
-    if (!clicked)
-     {
-	clicked = true;
-         root()->removeWidget(authButton);
-        stack->setCurrentWidget(authForm);
-     }
+   if(!clicked) {
+     clicked = true;
+     authForm = new AuthForm(container);
+     root()->removeWidget(authButton);
+     container->removeWidget(postLoop);
+   }
 }
 
 WApplication *createApplication(const WEnvironment &env)
@@ -87,4 +95,3 @@ int main(int argc, char **argv)
 		std::cerr<< "exception" << e.what() <<std::endl;
 	}
  }
-

@@ -27,6 +27,9 @@ License: GNU GPL V3
 
 class AuthForm : public Wt::WContainerWidget 
 {
+private:
+//! Container for the dashboard
+      WContainerWidget *dashContainer;
 public:	
 
 //! A constructor for Authentication Form

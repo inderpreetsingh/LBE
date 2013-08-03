@@ -1,0 +1,16 @@
+<div class="header">
+<h1>${title}</h1>
+${tagline}
+</div>
+
+<div class="loginButton">
+${loginbutton}
+</div>
+
+<div class="allPosts">
+${postloop}
+</div>
+
+<div class="footer">
+
+</div>

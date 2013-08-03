@@ -19,7 +19,9 @@ The function handleThemeFile reads the content of file themes/yanni/loop.lml and
 */
 void handleThemeFile() 
 {
-	ifstream f("themes/yanni/loop.lml");
-	getline(f, tempText, '\0');
+	ifstream loop("themes/yanni/loop.lml");
+	getline(loop, loopTemplate, '\0');
+        ifstream main("themes/yanni/main.lml");
+        getline(main, mainTemplate, '\0');
 }
 

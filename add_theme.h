@@ -19,7 +19,12 @@ License GNU GPL V3
 #include <iostream>
 
 using namespace std;
-extern string tempText;
+
+//! string for storing the contents of loop file
+extern string loopTemplate;
+//! string for storing the contents of main file
+extern string mainTemplate;
+
 void handleThemeFile();
 
 #endif

@@ -22,7 +22,6 @@ AuthForm::AuthForm(WContainerWidget *parent)
 	{
 		session_.login().changed().connect(this,&AuthForm::authEvent);
 
-
 		Wt::Auth::AuthWidget *authWidget
 		= new Wt::Auth::AuthWidget(Session::auth(), session_.users(),
 						session_.login());
@@ -39,10 +38,14 @@ AuthForm::AuthForm(WContainerWidget *parent)
 	if(session_.login().loggedIn()){
 		Wt::log("notice") << "User" << session_.login().user().id()
 					<<"logged in.";
-            new dashboard(this);
+            WApplication::instance()->setInternalPath("/laka-admin");
+            dashContainer = new WContainerWidget(this);
+            new dashboard(dashContainer);
 	}
-	else
+	else {
 		Wt::log("notice") << "User logged out.";
+                dashContainer->clear();
+             }
 	}
 
 

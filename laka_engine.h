@@ -53,13 +53,17 @@ private:
 	//! Checks whether authPushButton is clicked or not?
 	bool clicked;
 	//! The Grand Parent Widget for all the widgets inside LakaEngine.
-	WStackedWidget *stack;
+	WContainerWidget *container;
+        //! Stack of all the widgets
+        WStackedWidget *stack;
 	//! The authPushButton that invokes authentication forms.
 	WPushButton *authButton;
         //! Form for Authentication
         AuthForm *authForm;
 	//! Post loop loads all the posts from the database. 
 	PostLoop *postLoop;
+        //! template for main file of theme
+        WTemplate *main;
 };
 #endif
 
