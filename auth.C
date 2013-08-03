@@ -30,15 +30,23 @@ AuthForm::AuthForm(WContainerWidget *parent)
 		authWidget->setRegistrationEnabled(true);
 
 		authWidget->processEnvironment();
-
+                
+                
+	       if(session_.login().loggedIn()){
+		    Wt::log("notice") << "User" << session_.login().user().id()
+					<<"logged in.";
+                    dashContainer = new WContainerWidget(this);
+                      new dashboard(dashContainer);
+         
+	        }
 		this->addWidget(authWidget);
+                          
 	}
 
 	void AuthForm::authEvent() {
 	if(session_.login().loggedIn()){
 		Wt::log("notice") << "User" << session_.login().user().id()
 					<<"logged in.";
-            WApplication::instance()->setInternalPath("/laka-admin");
             dashContainer = new WContainerWidget(this);
             new dashboard(dashContainer);
 	}

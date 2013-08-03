@@ -1,13 +1,21 @@
-<div class="header">
-<h1>${title}</h1>
-${tagline}
-</div>
+<div class="admin-bar">
 
-<div class="loginButton">
+<div class="id-login-button button">
 ${loginbutton}
 </div>
 
-<div class="allPosts">
+<div class="auth-form">
+${authForm}
+</div>
+
+</div>
+
+<div class="header">
+<h1 class="id-blog-title big-title" >${title}</h1>
+${tagline}
+</div>
+
+<div class="id-post-container">
 ${postloop}
 </div>
 

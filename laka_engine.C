@@ -31,7 +31,7 @@ LakaEngine::LakaEngine(const WEnvironment &env)
    container = new WContainerWidget(root());
    container->setStyleClass("container");
 
-   main = new WTemplate(root());
+   main = new WTemplate(container);
 
    main->setTemplateText(mainTemplate);
    main->bindString("tagline",    taglineString);
@@ -41,32 +41,18 @@ LakaEngine::LakaEngine(const WEnvironment &env)
    main->bindWidget("postloop",   postLoop);
 
    authButton = new WPushButton("Login/Register", root());
-   authButton->setLink(WLink(WLink::InternalPath, "/login"));
+   authButton->clicked().connect( this, &LakaEngine::authFormLoader);
+
+   authForm = new AuthForm(container);
+   main->bindWidget("authForm", authForm);
 
    main->bindWidget("loginbutton",authButton);
    
-   handlePathChange();
-   internalPathChanged().connect(this, &LakaEngine::handlePathChange);
-}
-
-void LakaEngine::handlePathChange()
-{
-    std::string path = internalPath();
-    
-    if(path == "/login")
-      authFormLoader();
-    else if(path == "/laka-admin")
-      container->removeWidget(postLoop);
 }
 
 void LakaEngine::authFormLoader()
 {
-   if(!clicked) {
-     clicked = true;
-     authForm = new AuthForm(container);
-     root()->removeWidget(authButton);
-     container->removeWidget(postLoop);
-   }
+  new WText("that works", root());
 }
 
 WApplication *createApplication(const WEnvironment &env)
@@ -81,7 +67,7 @@ int main(int argc, char **argv)
 		Wt::WServer server(argv[0]);
 
 		server.setServerConfiguration(argc,argv, WTHTTP_CONFIGURATION);
-		server.addEntryPoint(Wt::Application, createApplication, "");
+		server.addEntryPoint(Wt::Application, createApplication);
 
 		Session::configureAuth();
 

@@ -12,6 +12,7 @@ License: GNU GPL V3
 
 #include "setting_pannel.h"
 #include <Wt/WBreak>
+#include <Wt/WApplication>
 
 std::string titleString, taglineString;
 
@@ -37,5 +38,5 @@ void settingPannel::saveSettings()
 {
   titleString  = title->text().toUTF8();
   taglineString = tagline->text().toUTF8();
-  new WText("Settings saved", this);
+  new WText("Settings saved", this); 
 }

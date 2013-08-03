@@ -19,7 +19,7 @@ License: GNU GPL V3
 #include <Wt/WApplication>
 #include <Wt/WLineEdit>
 #include <Wt/WJavaScript>
-
+#include <Wt/WTextEdit>
 #include <sstream>
 
 #include "../post.h"

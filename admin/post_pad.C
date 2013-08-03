@@ -14,7 +14,8 @@ License: GNU GPL V3
 
 PostPad :: PostPad (WContainerWidget *parent)
         : WContainerWidget(parent),
-	postContent(this,"getPostContent")
+	postContent(this,"getPostContent"),
+        clicked(false)
 {
     WApplication::instance()->require("../resources/epic_editor/js/epiceditor.js");
     strm<<"var editor = new EpicEditor().load();";
@@ -31,13 +32,13 @@ PostPad :: PostPad (WContainerWidget *parent)
 }
 
 void PostPad :: getPost()
-{  
+{   
     strm<<postContent.createCall("editor.getElement('editor').body.innerHTML");
     WApplication::instance()->doJavaScript(strm.str());  
 }
 
 void PostPad :: storePost(std::string postContentStr)
-{
+{ 
     {
       dbo::Transaction t(session_);
       Post *newPost = new Post();
@@ -46,6 +47,7 @@ void PostPad :: storePost(std::string postContentStr)
       dbo::ptr<Post> postPtr = session_.add(newPost);     
       t.commit();
     }
+   
 }
  
 

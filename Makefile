@@ -1,8 +1,8 @@
 
-all: laka 
+all: lakaEngine 
 
-laka:	session.o laka_engine.o auth.o user.o post_loop.o post_pad.o add_theme.o dashboard.o setting_pannel.o
-	g++ session.o laka_engine.o auth.o user.o post_loop.o post_pad.o add_theme.o dashboard.o setting_pannel.o -o laka  -I/usr/local/include -L/usr/local/lib -lwthttp -lwt -lboost_regex -lboost_signals -lboost_system -lboost_thread -lboost_filesystem -lboost_date_time -lwtdbo -lwtdbosqlite3
+lakaEngine:	session.o laka_engine.o auth.o user.o post_loop.o post_pad.o add_theme.o dashboard.o setting_pannel.o
+	g++ session.o laka_engine.o auth.o user.o post_loop.o post_pad.o add_theme.o dashboard.o setting_pannel.o -o lakaEngine  -I/usr/local/include -L/usr/local/lib -lwthttp -lwt -lboost_regex -lboost_signals -lboost_system -lboost_thread -lboost_filesystem -lboost_date_time -lwtdbo -lwtdbosqlite3
 
 session.o: session.C
 	g++ -Wall -std=c++0x -c session.C
@@ -32,7 +32,7 @@ setting_pannel.o: admin/setting_pannel.C
 	g++ -Wall -std=c++0x -c admin/setting_pannel.C
 
 clean:
-	 rm -rf *.o laka
+	 rm -rf *.o lakaEngine
 
 run:
-	./laka --docroot . --http-address 0.0.0.0 --http-port 1313 
+	./lakaEngine --docroot . --http-address 0.0.0.0 --http-port 1313 
