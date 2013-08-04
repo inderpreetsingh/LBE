@@ -15,12 +15,14 @@ License: GNU GPL V3
 #include <Wt/WContainerWidget>
 #include <vector>
 #include <Wt/WTemplate>
+#include <Wt/WApplication>
 
 #include "post.h"
 #include "global.h"
 
 using namespace Wt;
 namespace dbo = Wt::Dbo;
+
 //! Class for traversing through all the posts
 /*!
     This class is inherited from WContainerWidget with purpose of making a widget that can be used to display all the posts at one time. 
@@ -34,8 +36,14 @@ public:
 	PostLoop(Wt::WContainerWidget * parent);
 	//! theLoop is the main loop that traverses through all the posts in the blog.
 	void theLoop();
+        WApplication *App;
+        void handlePath();
 private:
+
 	//! allPosts is a container where all the posts are stored
-	PostCollection allPosts;
+        PostCollection allPosts;
+        std::string postPath;
+        WTemplate *singlePostTemplate;
+        WContainerWidget *postContainer;
 };
 #endif

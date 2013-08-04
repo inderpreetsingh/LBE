@@ -38,6 +38,8 @@ private:
     WContainerWidget *postEditor;
     WLineEdit *postTitle;
     WPushButton *submitPost;
+    WLineEdit *postLink;
+
     
     JSignal<std::string> postContent;
 

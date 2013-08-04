@@ -40,6 +40,9 @@ LakaEngine::LakaEngine(const WEnvironment &env)
    postLoop = new PostLoop(container);
    main->bindWidget("postloop",   postLoop);
 
+   internalPathChanged().connect(this, &LakaEngine::handlePathChange);
+   handlePathChange();
+
    authButton = new WPushButton("Login/Register", root());
    authButton->clicked().connect( this, &LakaEngine::authFormLoader);
 
@@ -53,6 +56,15 @@ LakaEngine::LakaEngine(const WEnvironment &env)
 void LakaEngine::authFormLoader()
 {
   new WText("that works", root());
+}
+
+void LakaEngine::handlePathChange()
+{
+    std::string path = internalPath();
+    if(path != "/")
+    {
+      postLoop->handlePath();
+    }
 }
 
 WApplication *createApplication(const WEnvironment &env)

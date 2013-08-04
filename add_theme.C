@@ -21,7 +21,11 @@ void handleThemeFile()
 {
 	ifstream loop("themes/yanni/loop.lml");
 	getline(loop, loopTemplate, '\0');
+
         ifstream main("themes/yanni/main.lml");
         getline(main, mainTemplate, '\0');
+
+        ifstream post("themes/yanni/post.lml");
+        getline(post, postTemplate, '\0');
 }
 

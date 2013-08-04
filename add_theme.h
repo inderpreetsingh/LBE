@@ -24,6 +24,8 @@ using namespace std;
 extern string loopTemplate;
 //! string for storing the contents of main file
 extern string mainTemplate;
+//! string for storing the contents of post file
+extern string postTemplate;
 
 void handleThemeFile();
 

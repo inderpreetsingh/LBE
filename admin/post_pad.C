@@ -24,6 +24,9 @@ PostPad :: PostPad (WContainerWidget *parent)
     postTitle = new WLineEdit(this);
     postTitle->setEmptyText("Title of post");
 
+    postLink = new WLineEdit(this);
+    postLink->setEmptyText("Permalink");
+
     postEditor = new WContainerWidget(this);
     postEditor->setId("epiceditor");    
     submitPost = new WPushButton("Submit", this);
@@ -38,17 +41,14 @@ void PostPad :: getPost()
 }
 
 void PostPad :: storePost(std::string postContentStr)
-{ 
+{
     {
       dbo::Transaction t(session_);
       Post *newPost = new Post();
-      newPost->postName = postTitle->text().toUTF8();
+      newPost->postName    = postTitle->text().toUTF8();
       newPost->postContent = postContentStr;
-      dbo::ptr<Post> postPtr = session_.add(newPost);     
+      newPost->permalink   = "/" + postLink->text().toUTF8();
+      dbo::ptr<Post> postPtr = session_.add(newPost);
       t.commit();
     }
-   
 }
- 
-
-
