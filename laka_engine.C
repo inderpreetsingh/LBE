@@ -31,9 +31,19 @@ LakaEngine::LakaEngine(const WEnvironment &env)
    container = new WContainerWidget(root());
    container->setStyleClass("container");
 
-   headerContainer = new WContainerWidget(root());
+   headerContainer = new WContainerWidget();
+
+   authForm = new AuthForm(headerContainer);
 
    postLoop = new PostLoop(container);
+   
+   headerPanel = new WPanel(root());
+   headerPanel->setTitle("Login/Sign up");
+   headerPanel->setCentralWidget(headerContainer);
+   headerPanel->setCollapsible(true);
+   headerPanel->setCollapsed(false);
+   WAnimation animation(WAnimation::SlideInFromTop, WAnimation::EaseOut, 100);
+   headerPanel->setAnimation(animation);
 
    main = new WTemplate(root());
    main->setTemplateText(mainTemplate);
@@ -43,20 +53,7 @@ LakaEngine::LakaEngine(const WEnvironment &env)
 
    internalPathChanged().connect(this, &LakaEngine::handlePathChange);
 
-   authButton = new WPushButton("Login/Register", headerContainer);
-   authButton->clicked().connect( this, &LakaEngine::authFormLoader);
-
-   authForm = new AuthForm(headerContainer);
-   main->bindWidget("authForm", authForm);
-
-   main->bindWidget("loginbutton",authButton);
-   
-   handlePathChange(); 
-}
-
-void LakaEngine::authFormLoader()
-{
-  new WText("that works", root());
+   handlePathChange();
 }
 
 void LakaEngine::handlePathChange()

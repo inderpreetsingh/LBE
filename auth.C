@@ -55,6 +55,3 @@ AuthForm::AuthForm(WContainerWidget *parent)
                 dashContainer->clear();
              }
 	}
-
-
-

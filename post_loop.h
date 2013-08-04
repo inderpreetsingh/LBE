@@ -16,12 +16,17 @@ License: GNU GPL V3
 #include <vector>
 #include <Wt/WTemplate>
 #include <Wt/WApplication>
+#include <Wt/WText>
+
+#include <sstream>
+#include <string>
 
 #include "post.h"
 #include "global.h"
 
 using namespace Wt;
 namespace dbo = Wt::Dbo;
+using namespace std;
 
 //! Class for traversing through all the posts
 /*!
@@ -32,18 +37,26 @@ This traversal is done through a loop so the name post loop
 class PostLoop : public Wt::WContainerWidget
 {
 public:
-	
+	//! Constructor for doing dbo transaction to retrieve all the posts
 	PostLoop(Wt::WContainerWidget * parent);
 	//! theLoop is the main loop that traverses through all the posts in the blog.
 	void theLoop();
-        WApplication *App;
+        ///! handlePath manages path and shows post according to permalink
         void handlePath();
 private:
-
-	//! allPosts is a container where all the posts are stored
+	//! allPosts is a collection, where all the posts are stored
         PostCollection allPosts;
+        //! string to store the internal path
         std::string postPath;
+        //! Template used when seing a single post, i.e after clicking on title
         WTemplate *singlePostTemplate;
+        //! The parent widget that holds all the widgets of the post loop
         WContainerWidget *postContainer;
+        //! contentStream for streaming postContent, and subStream to stream postContent until more tag
+        stringstream contentStream, subStream;
+        //! wordString stores the postContent word by word which is used for comparision
+        string wordString;
+        //! WText for displaying the postContent
+        WText *postText;
 };
 #endif

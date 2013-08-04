@@ -36,7 +36,7 @@ PostPad :: PostPad (WContainerWidget *parent)
 
 void PostPad :: getPost()
 {   
-    strm<<postContent.createCall("editor.getElement('editor').body.innerHTML");
+    strm<<postContent.createCall("editor.getElement('previewer').body.innerHTML");
     WApplication::instance()->doJavaScript(strm.str());  
 }
 

@@ -16,6 +16,8 @@ License: GNU GPL V3
 #include <Wt/WContainerWidget>
 #include <Wt/WServer>
 #include <Wt/WPushButton>
+#include <Wt/WPanel>
+#include <Wt/WAnimation>
 
 #include "global.h"
 #include "auth.h"
@@ -54,8 +56,8 @@ private:
 	bool clicked;
 	//! The Grand Parent Widget for all the widgets inside LakaEngine.
 	WContainerWidget *container, *headerContainer;
-        //! Stack of all the widgets
-        WStackedWidget *stack;
+        //! Closable panel for header Widgets
+        WPanel *headerPanel;
 	//! The authPushButton that invokes authentication forms.
 	WPushButton *authButton;
         //! Form for Authentication

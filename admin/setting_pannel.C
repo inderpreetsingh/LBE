@@ -22,13 +22,11 @@ settingPannel::settingPannel(WContainerWidget *parent):WContainerWidget(parent)
 
   new WText("Title of Blog: ", settingContainer);
   title = new WLineEdit(settingContainer); 
-//  title->setEmptyText("some catchy title");
 
   settingContainer->addWidget(new WBreak());
   
   new WText("Tagline of Blog: ", settingContainer);
   tagline = new WLineEdit(settingContainer);
-//  tagline->setEmptyText("Some cheesy tagline");
 
   saveButton = new WPushButton("Save", settingContainer);
   saveButton->clicked().connect(this, &settingPannel::saveSettings);

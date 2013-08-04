@@ -37,10 +37,19 @@ void PostLoop::theLoop()
      for (auto i:allPosts)
 	{
           WAnchor *singlePostName = new WAnchor(WLink(WLink::InternalPath,(i)->permalink), (i)->postName, postContainer);
+/*          contentStream.str(i->postContent);
+          while(contentStream >> wordString)
+          {
+            if(wordString != "<!-more->")
+            {
+              subStream<<wordString;
+            }
+          }  */
+          postText = new WText(i->postContent);
 	  WTemplate* loop = new WTemplate(postContainer);
 	  loop->setTemplateText(loopTemplate);
-	  loop->bindWidget("post-title",singlePostName);
-	  loop->bindString("post-content",(i)->postContent);
+	  loop->bindWidget("post-title",   singlePostName);
+	  loop->bindWidget("post-content", postText);
         }
 }
 
