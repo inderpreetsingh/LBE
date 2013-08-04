@@ -31,26 +31,27 @@ LakaEngine::LakaEngine(const WEnvironment &env)
    container = new WContainerWidget(root());
    container->setStyleClass("container");
 
-   main = new WTemplate(container);
+   headerContainer = new WContainerWidget(root());
 
+   postLoop = new PostLoop(container);
+
+   main = new WTemplate(root());
    main->setTemplateText(mainTemplate);
    main->bindString("tagline",    taglineString);
    main->bindString("title",      titleString);
-
-   postLoop = new PostLoop(container);
    main->bindWidget("postloop",   postLoop);
 
    internalPathChanged().connect(this, &LakaEngine::handlePathChange);
-   handlePathChange();
 
-   authButton = new WPushButton("Login/Register", root());
+   authButton = new WPushButton("Login/Register", headerContainer);
    authButton->clicked().connect( this, &LakaEngine::authFormLoader);
 
-   authForm = new AuthForm(container);
+   authForm = new AuthForm(headerContainer);
    main->bindWidget("authForm", authForm);
 
    main->bindWidget("loginbutton",authButton);
    
+   handlePathChange(); 
 }
 
 void LakaEngine::authFormLoader()
@@ -61,7 +62,13 @@ void LakaEngine::authFormLoader()
 void LakaEngine::handlePathChange()
 {
     std::string path = internalPath();
-    if(path != "/")
+   if(path == "/")
+    {
+       container->clear();
+       postLoop = new PostLoop(container);
+       main->bindWidget("postloop",   postLoop);
+    }
+   else 
     {
       postLoop->handlePath();
     }
