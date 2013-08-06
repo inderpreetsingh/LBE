@@ -18,11 +18,13 @@ string mainTemplate;
 LakaEngine::LakaEngine(const WEnvironment &env)
     :WApplication(env)
 {
+   useStyleSheet("themes/yanni/style.css");
+
    if(titleString == "")
-   titleString = "Laka";
+   titleString = "Lakaness";
 
    if(taglineString == "")
-   taglineString="Just another awesome blog";
+   taglineString="Give a height to your thoughts";
    
    setTitle(titleString);
    useStyleSheet("resources/default.css");

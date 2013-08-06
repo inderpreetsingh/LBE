@@ -28,6 +28,12 @@ class User {
 
 private:
 	std::string name;
+        enum role {
+		admin = 0,
+		author= 1,
+		guest = 2
+		};
+	role karma;
 
 public:
 

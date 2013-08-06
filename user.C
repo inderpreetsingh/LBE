@@ -1,5 +1,6 @@
 #include "user.h"
 
 User::User()
-	:name("unnamed"){}
+	:name("unnamed"),
+	karma(admin){}
 

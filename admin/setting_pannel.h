@@ -17,16 +17,17 @@ License: GNU GPL V3
 #include <Wt/WContainerWidget>
 #include <Wt/WLineEdit>
 #include <Wt/WPushButton>
-#include  <Wt/WText>
-using namespace Wt;
+#include <Wt/WText>
 
-//! Strings for storing the title and tagline
-extern std::string titleString, taglineString;
+#include "../post.h"
+#include "../global.h"
+
+using namespace Wt;
 
 //! Class providing the user with various general settings
 /*!
    This class allows user to customize the blog. It gives user power to control it's own blog.
-   It consist of various things like changing the title, theme, etc.
+   It consist of various things like changing the title, tagline, etc.
 */
 class settingPannel: public WContainerWidget
 {
@@ -40,10 +41,11 @@ private:
 //! Parent Container to all the settings widgets
      WContainerWidget *settingContainer;
 //! Input field to input main title
-     WLineEdit *title;
+     WLineEdit *titleEdit;
 //! Input field to add tagline
-     WLineEdit *tagline;
+     WLineEdit *taglineEdit;
 //! Button to save all the changes
      WPushButton *saveButton;
 };
+
 #endif

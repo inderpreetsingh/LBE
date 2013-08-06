@@ -14,9 +14,9 @@ License: GNU GPL V3
 
 PostPad :: PostPad (WContainerWidget *parent)
         : WContainerWidget(parent),
-	postContent(this,"getPostContent"),
-        clicked(false)
+	postContent(this,"getPostContent")
 {
+    published = false;
     WApplication::instance()->require("../resources/epic_editor/js/epiceditor.js");
     strm<<"var editor = new EpicEditor().load();";
     WApplication::instance()->doJavaScript(strm.str());
@@ -42,13 +42,27 @@ void PostPad :: getPost()
 
 void PostPad :: storePost(std::string postContentStr)
 {
+    if(!published)
     {
-      dbo::Transaction t(session_);
-      Post *newPost = new Post();
-      newPost->postName    = postTitle->text().toUTF8();
-      newPost->postContent = postContentStr;
-      newPost->permalink   = "/" + postLink->text().toUTF8();
-      dbo::ptr<Post> postPtr = session_.add(newPost);
-      t.commit();
+      {
+       dbo::Transaction t(session_);
+       Post *newPost = new Post();
+       newPost->postName    = postTitle->text().toUTF8();
+       newPost->postContent = postContentStr;
+       newPost->permalink   = "/" + postLink->text().toUTF8();
+       postPtr = session_.add(newPost);
+       t.commit();
+      }
+      published = true;
+    }
+    else
+    {
+      {
+       dbo::Transaction t(session_);
+       postPtr.modify()->postName = postTitle->text().toUTF8();
+       postPtr.modify()->postContent = postContentStr;
+       postPtr.modify()->permalink = "/" + postLink->text().toUTF8();
+       t.commit();
+      }
     }
 }

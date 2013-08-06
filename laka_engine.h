@@ -50,6 +50,8 @@ public:
         void handlePathChange();
         //! Loads the published posts
         void posts();
+        //! Function for viewing things like title and tagline from database
+        void headerText();
 	
 private:
 	//! Checks whether authPushButton is clicked or not?
@@ -66,6 +68,8 @@ private:
 	PostLoop *postLoop;
         //! template for main file of theme
         WTemplate *main;
+        //! string for storing the title and tagline
+        std::string titleString, taglineString;
 };
 #endif
 

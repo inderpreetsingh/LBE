@@ -21,12 +21,12 @@ settingPannel::settingPannel(WContainerWidget *parent):WContainerWidget(parent)
   settingContainer = new WContainerWidget(this);
 
   new WText("Title of Blog: ", settingContainer);
-  title = new WLineEdit(settingContainer); 
-
+  titleEdit = new WLineEdit(settingContainer); 
+  
   settingContainer->addWidget(new WBreak());
   
   new WText("Tagline of Blog: ", settingContainer);
-  tagline = new WLineEdit(settingContainer);
+  taglineEdit = new WLineEdit(settingContainer);
 
   saveButton = new WPushButton("Save", settingContainer);
   saveButton->clicked().connect(this, &settingPannel::saveSettings);
@@ -34,7 +34,8 @@ settingPannel::settingPannel(WContainerWidget *parent):WContainerWidget(parent)
 
 void settingPannel::saveSettings()
 {
-  titleString  = title->text().toUTF8();
-  taglineString = tagline->text().toUTF8();
-  new WText("Settings saved", this); 
+  titleString   = titleEdit->text().toUTF8();
+  taglineString = taglineEdit->text().toUTF8();
+
+  new WText("Settings saved, refresh to see changes", this);
 }

@@ -17,36 +17,17 @@ using namespace Wt;
 namespace dbo = Wt::Dbo;
 
 class Post;
-class Category;
 
 typedef dbo::collection< dbo::ptr<Post> > PostCollection;
-//typedef dbo::collection< dbo::ptr<Category> > cat;
 
 class Post {
 public: string postName, postContent, permalink;
-	
-//	dbo::ptr<Category> category_ptr;
 
 	template<class Action>
 	void persist(Action& a) {
 	dbo::field(a, postName,    "postname");
 	dbo::field(a, permalink,   "permalink");
 	dbo::field(a, postContent, "postcontent");
-//	dbo::belongsTo(a, category_ptr, "category");
 	}
 };
-
-/*class Category {
-public: string categoryname;
-	
-	dbo::collection< dbo::ptr<Post> > post_ptr;
-
-	template<class Action>
-	void persist(Action& a) {
-	dbo::field(a, categoryname, "categoryname");
-
-	dbo::hasMany(a, post_ptr, dbo::ManyToOne, "category");
-	}
-};
-*/
 #endif
