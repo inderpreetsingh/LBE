@@ -17,22 +17,25 @@ License: GNU GPL V3
 #include "global.h"
 #include "admin/dashboard.h"
 
+#include <Wt/WDateTime>
+
 AuthForm::AuthForm(WContainerWidget *parent)
 	:WContainerWidget(parent)
 	{
 		session_.login().changed().connect(this,&AuthForm::authEvent);
+ 
 
-		Wt::Auth::AuthWidget *authWidget
-		= new Wt::Auth::AuthWidget(Session::auth(), session_.users(),
+		authWidget = new Wt::Auth::AuthWidget(Session::auth(), session_.users(),
 						session_.login());
 		
 		authWidget->model()->addPasswordAuth(&Session::passwordAuth());
-		authWidget->setRegistrationEnabled(true);
 
 		authWidget->processEnvironment();
+
+                registerAdmin();
                 
-                
-	       if(session_.login().loggedIn()){
+
+	        if(session_.login().loggedIn()){
 		    Wt::log("notice") << "User" << session_.login().user().id()
 					<<"logged in.";
                     dashContainer = new WContainerWidget(this);
@@ -55,3 +58,25 @@ AuthForm::AuthForm(WContainerWidget *parent)
                 dashContainer->clear();
              }
 	}
+
+void AuthForm :: registerAdmin()
+{
+   try{
+        {
+        dbo::Transaction t(session_);
+        dbo::ptr<User> admin = session_.find<User>().where("name=?").bind("admin");
+        std::string adminString = admin->name;
+        t.commit();
+        }
+   }
+   catch(exception& e){
+      {
+      dbo::Transaction t(session_);
+      User *newUser = new User();
+      newUser->name = "admin";
+      dbo::ptr<User> newAdmin = session_.add(newUser);
+      t.commit();
+      }
+      authWidget->registerNewUser();
+   }
+}

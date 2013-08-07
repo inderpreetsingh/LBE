@@ -1,6 +1,14 @@
-/**
-User.h file for creating a presistence class for User and mapping authinfo with user. 
-*/
+/******************************************************
+FileName: session.h
+*
+Description: File for creating a presistence class for User and mapping authinfo with user. 
+*
+Authors: Gauravjeet Singh, Shaina Sabarwal, Inderpreet Singh
+*
+License: GNU GPL V3
+*
+******************************************************/
+
 #ifndef USER_H_
 #define USER_H_
 
@@ -25,16 +33,6 @@ Definition of class User
 */
 
 class User {
-
-private:
-	std::string name;
-        enum role {
-		admin = 0,
-		author= 1,
-		guest = 2
-		};
-	role karma;
-
 public:
 
 /** 
@@ -42,6 +40,7 @@ adding a persist function, persist function is used to create tables in database
 */
 	User();
 	
+	std::string name;
 	template <class Action>
 	void persist(Action& a)
 	{

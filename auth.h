@@ -44,6 +44,13 @@ authEvent() is called by constructor whenever there is a change in the state of 
 It also logs whenever a user logs in or logs out
 */
 	void authEvent();
+//! A function to provide the register facility
+/*!
+   registerAdmin() is called in the constructor of this class, It first checks whether the admin is already registered or not. If not, it provides with the registration values otherwise those fields are not visible.
+*/
+        void registerAdmin();
+//! AuthWidget, making a common widget for all auth related things like login, register and logout
+         Wt::Auth::AuthWidget *authWidget;
 
 };
 #endif
