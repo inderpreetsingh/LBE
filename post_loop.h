@@ -17,6 +17,7 @@ License: GNU GPL V3
 #include <Wt/WTemplate>
 #include <Wt/WApplication>
 #include <Wt/WText>
+#include <Wt/WAnchor>
 
 #include <sstream>
 #include <string>
@@ -43,6 +44,8 @@ public:
 	void theLoop();
         ///! handlePath manages path and shows post according to permalink
         void handlePath();
+
+	Session session_;
 private:
 	//! allPosts is a collection, where all the posts are stored
         PostCollection allPosts;
@@ -53,10 +56,10 @@ private:
         //! The parent widget that holds all the widgets of the post loop
         WContainerWidget *postContainer;
         //! contentStream for streaming postContent, and subStream to stream postContent until more tag
-        stringstream contentStream, subStream;
-        //! wordString stores the postContent word by word which is used for comparision
-        string wordString;
+        stringstream contentStream;
         //! WText for displaying the postContent
         WText *postText;
+        //! Anchor for title of post and see more tag
+        WAnchor *singlePostName;
 };
 #endif

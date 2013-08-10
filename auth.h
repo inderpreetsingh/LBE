@@ -30,6 +30,7 @@ class AuthForm : public Wt::WContainerWidget
 private:
 //! Container for the dashboard
       WContainerWidget *dashContainer;
+      Session session_;
 public:	
 
 //! A constructor for Authentication Form

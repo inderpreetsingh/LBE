@@ -14,7 +14,6 @@ License: GNU GPL V3
 
 **************************************************************************/
 #include "auth.h"
-#include "global.h"
 #include "admin/dashboard.h"
 
 #include <Wt/WDateTime>

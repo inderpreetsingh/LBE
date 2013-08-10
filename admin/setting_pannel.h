@@ -19,6 +19,7 @@ License: GNU GPL V3
 #include <Wt/WPushButton>
 #include <Wt/WText>
 
+#include "../user.h"
 #include "../post.h"
 #include "../global.h"
 
@@ -46,6 +47,9 @@ private:
      WLineEdit *taglineEdit;
 //! Button to save all the changes
      WPushButton *saveButton;
+//! dbo smart pointer that points to user admin 
+     dbo::ptr<User> userPtr;
+     Session session_;
 };
 
 #endif

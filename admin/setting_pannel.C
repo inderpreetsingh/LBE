@@ -14,28 +14,31 @@ License: GNU GPL V3
 #include <Wt/WBreak>
 #include <Wt/WApplication>
 
-std::string titleString, taglineString;
-
 settingPannel::settingPannel(WContainerWidget *parent):WContainerWidget(parent)
 {
-  settingContainer = new WContainerWidget(this);
+   settingContainer = new WContainerWidget(this);
 
-  new WText("Title of Blog: ", settingContainer);
-  titleEdit = new WLineEdit(settingContainer); 
+   new WText("Title of Blog: ", settingContainer);
+   titleEdit = new WLineEdit(settingContainer); 
   
-  settingContainer->addWidget(new WBreak());
+   settingContainer->addWidget(new WBreak());
   
-  new WText("Tagline of Blog: ", settingContainer);
-  taglineEdit = new WLineEdit(settingContainer);
+   new WText("Tagline of Blog: ", settingContainer);
+   taglineEdit = new WLineEdit(settingContainer);
 
-  saveButton = new WPushButton("Save", settingContainer);
-  saveButton->clicked().connect(this, &settingPannel::saveSettings);
+   saveButton = new WPushButton("Save", settingContainer);
+   saveButton->clicked().connect(this, &settingPannel::saveSettings);
 }
 
 void settingPannel::saveSettings()
 {
-  titleString   = titleEdit->text().toUTF8();
-  taglineString = taglineEdit->text().toUTF8();
-
-  new WText("Settings saved, refresh to see changes", this);
+   {
+   dbo::Transaction t(session_);
+   userPtr = session_.find<User>().where("name = ?").bind("admin");
+   userPtr.modify()->title = titleEdit->text().toUTF8();
+   userPtr.modify()->tagline=taglineEdit->text().toUTF8();
+   t.commit();
+   }
+   
+   new WText("Settings saved, refresh to see changes", this);
 }

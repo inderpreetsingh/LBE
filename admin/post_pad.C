@@ -18,7 +18,7 @@ PostPad :: PostPad (WContainerWidget *parent)
 {
     published = false;
     WApplication::instance()->require("../resources/epic_editor/js/epiceditor.js");
-    strm<<"var editor = new EpicEditor().load();";
+    strm<<"var optsi={file:{name:'epiceditor',defaultContent:'Write your post here', autoSave:false}}; var editor = new EpicEditor(optsi).load();";
     WApplication::instance()->doJavaScript(strm.str());
 
     postTitle = new WLineEdit(this);
@@ -36,7 +36,7 @@ PostPad :: PostPad (WContainerWidget *parent)
 
 void PostPad :: getPost()
 {   
-    strm<<postContent.createCall("editor.getElement('previewer').body.innerHTML");
+    strm<<postContent.createCall("editor.getElement('previewer').getElementById('epiceditor-preview').innerHTML");
     WApplication::instance()->doJavaScript(strm.str());  
 }
 

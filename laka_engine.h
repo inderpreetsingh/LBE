@@ -23,8 +23,6 @@ License: GNU GPL V3
 #include "auth.h"
 #include "post_loop.h"
 
-Session session_; //! a globally shared application wide session object.
-
 using namespace Wt;
 
 //! LakaEngine is the main class of Laka Engine. 
@@ -37,6 +35,7 @@ using namespace Wt;
 class LakaEngine : public Wt::WApplication
 {
 public:
+        Session session_; //! a globally shared application wide session object.
 	//! Constructor for LakaEngine class.
 	/*!
 	    Adds the grand parent container division to the front end, adds style, title etc. to the app.
@@ -51,7 +50,7 @@ public:
         //! Loads the published posts
         void posts();
         //! Function for viewing things like title and tagline from database
-        void headerText();
+        void applySettings();
 	
 private:
 	//! Checks whether authPushButton is clicked or not?

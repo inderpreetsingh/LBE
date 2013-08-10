@@ -20,6 +20,11 @@ LakaEngine::LakaEngine(const WEnvironment &env)
 {
    useStyleSheet("themes/yanni/style.css");
 
+   applySettings();
+
+   cout<<"__________title_______"<<titleString<<endl;
+   cout<<"_________tagline______"<<taglineString<<endl;
+
    if(titleString == "")
    titleString = "Lakaness";
 
@@ -56,6 +61,23 @@ LakaEngine::LakaEngine(const WEnvironment &env)
    internalPathChanged().connect(this, &LakaEngine::handlePathChange);
 
    handlePathChange();
+}
+
+void LakaEngine::applySettings()
+{
+   try{
+        {
+        dbo::Transaction t(session_);
+        dbo::ptr<User> userPtr = session_.find<User>().where("name = ?").bind("admin");
+        titleString = userPtr->title;
+        taglineString=userPtr->tagline;
+        t.commit();
+        }
+   }
+   catch(exception& e)
+   {
+       cout<<"Register first";
+   }
 }
 
 void LakaEngine::handlePathChange()

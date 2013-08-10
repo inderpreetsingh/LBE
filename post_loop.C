@@ -1,4 +1,4 @@
-/*******************************************************
+/******************************************************
 
 FileName: post_loop.C
 
@@ -14,7 +14,6 @@ License GNU GPL V3
 #include "add_theme.h"
 
 #include <Wt/WLink>
-#include <Wt/WAnchor>
 
 string loopTemplate;
 string postTemplate;
@@ -34,18 +33,16 @@ PostLoop::PostLoop(WContainerWidget *parent)
 void PostLoop::theLoop()
 {
      handleThemeFile();
+  
      for (auto i:allPosts)
 	{
-          WAnchor *singlePostName = new WAnchor(WLink(WLink::InternalPath,(i)->permalink), (i)->postName, postContainer);
-/*          contentStream.str(i->postContent);
-          while(contentStream >> wordString)
-          {
-            if(wordString != "<!-more->")
-            {
-              subStream<<wordString;
-            }
-          }  */
-          postText = new WText(i->postContent);
+          singlePostName = new WAnchor(WLink(WLink::InternalPath,(i)->permalink), (i)->postName, postContainer);
+          contentStream.str("");
+          
+          contentStream<<(i)->postContent;
+
+          postText = new WText(contentStream.str());
+
 	  WTemplate* loop = new WTemplate(postContainer);
 	  loop->setTemplateText(loopTemplate);
 	  loop->bindWidget("post-title",   singlePostName);

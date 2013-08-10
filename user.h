@@ -40,11 +40,13 @@ adding a persist function, persist function is used to create tables in database
 */
 	User();
 	
-	std::string name;
+	std::string name, title, tagline;
 	template <class Action>
 	void persist(Action& a)
 	{
-		dbo::field(a, name, "name" );	
+		dbo::field(a, name, "name" );
+                dbo::field(a, title, "title");
+                dbo::field(a, tagline,"tagline");
 	}
 };
 

@@ -40,7 +40,7 @@ public:
     void storePost(std::string postContent);
     //! Function to get the post from editor to string
     void getPost();
-
+    Session session_;
 private:
     //! Container to hold the editor
     WContainerWidget *postEditor;
