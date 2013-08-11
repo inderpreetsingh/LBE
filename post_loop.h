@@ -51,6 +51,7 @@ private:
         PostCollection allPosts;
         //! string to store the internal path
         std::string postPath;
+	std::string cat_str;
         //! Template used when seing a single post, i.e after clicking on title
         WTemplate *singlePostTemplate;
         //! The parent widget that holds all the widgets of the post loop
@@ -59,6 +60,8 @@ private:
         stringstream contentStream;
         //! WText for displaying the postContent
         WText *postText;
+	//! WText for displaying categories
+	WText *postCat;
         //! Anchor for title of post and see more tag
         WAnchor *singlePostName;
 };

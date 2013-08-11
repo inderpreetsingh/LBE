@@ -40,7 +40,7 @@ adding a persist function, persist function is used to create tables in database
 */
 	User();
 	
-	std::string name, title, tagline;
+	std::string name, title, tagline, category;
 	template <class Action>
 	void persist(Action& a)
 	{

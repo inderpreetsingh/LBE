@@ -40,13 +40,16 @@ void PostLoop::theLoop()
           contentStream.str("");
           
           contentStream<<(i)->postContent;
-
-          postText = new WText(contentStream.str());
-
+	  for(auto j:i->categories)
+	  cat_str = j->checkedcat;
+           
+	  postText = new WText(contentStream.str());
+	  postCat = new WText(cat_str);
 	  WTemplate* loop = new WTemplate(postContainer);
 	  loop->setTemplateText(loopTemplate);
 	  loop->bindWidget("post-title",   singlePostName);
 	  loop->bindWidget("post-content", postText);
+	  loop->bindWidget("categories", postCat);
         }
 }
 
@@ -62,6 +65,7 @@ void PostLoop::handlePath()
     dbo::ptr<Post> postPtr = session_.find<Post>().where("permalink = ?").bind(postPath);
     singlePostTemplate->bindString("post-name",    postPtr->postName);
     singlePostTemplate->bindString("post-content", postPtr->postContent);
+    singlePostTemplate->bindString("categories", cat_str);
     t.commit();
    }
 }

@@ -62,6 +62,7 @@ Session::Session(): connection_("laka.db")
   mapClass<AuthInfo>("auth_info");
   mapClass<AuthInfo::AuthIdentityType>("auth_identity");
   mapClass<AuthInfo::AuthTokenType>("auth_token");
+  mapClass<Category> ("category");
 
   try {
     createTables();

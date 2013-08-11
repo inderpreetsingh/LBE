@@ -45,6 +45,8 @@ private:
      WLineEdit *titleEdit;
 //! Input field to add tagline
      WLineEdit *taglineEdit;
+//! Input field to add categories
+     WLineEdit *categoryEdit;
 //! Button to save all the changes
      WPushButton *saveButton;
 //! dbo smart pointer that points to user admin 

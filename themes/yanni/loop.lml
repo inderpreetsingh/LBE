@@ -6,3 +6,6 @@
 <p>${post-content}</p>
 </div>
 
+<div class="categories">
+<p>${categories}</p>
+</div>

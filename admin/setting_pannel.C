@@ -26,6 +26,11 @@ settingPannel::settingPannel(WContainerWidget *parent):WContainerWidget(parent)
    new WText("Tagline of Blog: ", settingContainer);
    taglineEdit = new WLineEdit(settingContainer);
 
+   settingContainer->addWidget(new WBreak());
+
+   new WText("Add New Category", settingContainer);
+   categoryEdit = new WLineEdit(settingContainer);
+
    saveButton = new WPushButton("Save", settingContainer);
    saveButton->clicked().connect(this, &settingPannel::saveSettings);
 }
@@ -33,12 +38,19 @@ settingPannel::settingPannel(WContainerWidget *parent):WContainerWidget(parent)
 void settingPannel::saveSettings()
 {
    {
-   dbo::Transaction t(session_);
-   userPtr = session_.find<User>().where("name = ?").bind("admin");
-   userPtr.modify()->title = titleEdit->text().toUTF8();
-   userPtr.modify()->tagline=taglineEdit->text().toUTF8();
-   t.commit();
+     dbo::Transaction t(session_);
+     userPtr = session_.find<User>().where("name = ?").bind("admin");
+     userPtr.modify()->title = titleEdit->text().toUTF8();
+     userPtr.modify()->tagline = taglineEdit->text().toUTF8(); 
+     t.commit();
    }
-   
+   {
+     dbo::Transaction t(session_);
+     Category *cat = new Category();
+     cat->categoryname = categoryEdit->text().toUTF8();
+     dbo::ptr <Category> catPtr = session_.add(cat);
+     t.commit();
+   }
    new WText("Settings saved, refresh to see changes", this);
 }
+
