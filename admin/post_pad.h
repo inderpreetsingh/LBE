@@ -20,12 +20,14 @@ License: GNU GPL V3
 #include <Wt/WLineEdit>
 #include <Wt/WJavaScript>
 #include <Wt/WTextEdit>
+#include <Wt/WCheckBox>
 #include <sstream>
 
 #include "../post.h"
 #include "../global.h"
 
 using namespace Wt;
+using namespace std;
 //! Class providing with widgets required for adding post
 /*!
    PostPad class provides with a editor to write a post and a mechanisim to store that post in the database so that we can retrive it later.
@@ -40,6 +42,14 @@ public:
     void storePost(std::string postContent);
     //! Function to get the post from editor to string
     void getPost();
+    //! Function to get the categories 
+    void getCategory();
+    //! Vector of check boxes
+    vector <WCheckBox *> checked_cat;
+    //! vector of strings to store checkedboxex texts
+    vector <string> string_cat;   
+    //! string stream to copy the vector content into string stream
+    stringstream ss; 
     Session session_;
 private:
     //! Container to hold the editor
@@ -50,8 +60,12 @@ private:
     WPushButton *submitPost;
     //! LineEdit for the permalink of post
     WLineEdit *postLink;
+    //! Checkboxes to show categories
+    WCheckBox *checkbox;
     //! Dbo pointer to point to the last published post
     dbo::ptr<Post> postPtr;
+    //! Dbo pointer to point to the last published post
+    dbo::ptr<Category> catPtr;
     //! JSignal to interact with C++ and Javascript events
     /*!
         Basically it helps in getting all the content from editor that are in a specific html id and store them in string

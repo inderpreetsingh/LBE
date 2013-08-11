@@ -19,7 +19,7 @@ namespace dbo = Wt::Dbo;
 class Post;
 class Category;
 typedef dbo::collection< dbo::ptr<Post> > PostCollection;
-
+typedef dbo::collection< dbo::ptr<Category> > CategoryCollection;
 class Post {
 public: string postName, postContent, permalink;
 
