@@ -52,6 +52,7 @@ It also logs whenever a user logs in or logs out
         void registerAdmin();
 //! AuthWidget, making a common widget for all auth related things like login, register and logout
          Wt::Auth::AuthWidget *authWidget;
+         bool setLogin;
 
 };
 #endif
