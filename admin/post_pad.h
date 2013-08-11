@@ -44,6 +44,8 @@ public:
     void getPost();
     //! Function to get the categories 
     void getCategory();
+    //! Function to add new categories into Category table
+    void NewCat();
     //! Vector of check boxes
     vector <WCheckBox *> checked_cat;
     //! vector of strings to store checkedboxex texts
@@ -56,10 +58,14 @@ private:
     WContainerWidget *postEditor;
     //! LineEdit for title of post
     WLineEdit *postTitle;
+    //! Button, when fired starts function NewCat()
+    WPushButton *save_but;
     //! Button, when fired starts function getPost()
     WPushButton *submitPost;
     //! LineEdit for the permalink of post
     WLineEdit *postLink;
+    //! LineEdit for new category
+    WLineEdit *NewCategory;
     //! Checkboxes to show categories
     WCheckBox *checkbox;
     //! Dbo pointer to point to the last published post
