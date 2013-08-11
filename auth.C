@@ -21,7 +21,9 @@ License: GNU GPL V3
 AuthForm::AuthForm(WContainerWidget *parent)
 	:WContainerWidget(parent)
 	{
+                setLogin = false;
 		session_.login().changed().connect(this,&AuthForm::authEvent);
+                authEvent();
  
 
 		authWidget = new Wt::Auth::AuthWidget(Session::auth(), session_.users(),
@@ -32,17 +34,8 @@ AuthForm::AuthForm(WContainerWidget *parent)
 		authWidget->processEnvironment();
 
                 registerAdmin();
-                
-
-	        if(session_.login().loggedIn()){
-		    Wt::log("notice") << "User" << session_.login().user().id()
-					<<"logged in.";
-                    dashContainer = new WContainerWidget(this);
-                      new dashboard(dashContainer);
-         
-	        }
+                                
 		this->addWidget(authWidget);
-                          
 	}
 
 	void AuthForm::authEvent() {
@@ -51,10 +44,15 @@ AuthForm::AuthForm(WContainerWidget *parent)
 					<<"logged in.";
             dashContainer = new WContainerWidget(this);
             new dashboard(dashContainer);
+            setLogin = true;
 	}
 	else {
 		Wt::log("notice") << "User logged out.";
-                dashContainer->clear();
+                if(setLogin)
+                {
+                 cout<<setLogin;
+                 dashContainer->clear();
+                }
              }
 	}
 
