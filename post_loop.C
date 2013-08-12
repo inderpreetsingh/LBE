@@ -40,9 +40,9 @@ void PostLoop::theLoop()
           contentStream.str("");
           
           contentStream<<(i)->postContent;
-	  for(auto j:i->categories)
-	  cat_str = j->checkedcat;
-           
+	  for(auto k:i->categories)
+	  cat_str = (k)->checkedcat;
+          
 	  postText = new WText(contentStream.str());
 	  postCat = new WText(cat_str);
 	  WTemplate* loop = new WTemplate(postContainer);

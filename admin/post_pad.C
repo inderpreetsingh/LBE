@@ -68,13 +68,23 @@ void PostPad :: storePost(std::string postContentStr)
 {
     if(!published)
     {
+     for(auto j: checked_cat)
       {
+	if(j->isChecked()) {
+	string_cat.push_back(j->text().toUTF8());}
+      }
+	copy(string_cat.begin(), string_cat.end(), ostream_iterator<string>(ss,"\n"));
+
+    {
        dbo::Transaction t(session_);
        Post *newPost = new Post();
        newPost->postName    = postTitle->text().toUTF8();
        newPost->postContent = postContentStr;
        newPost->permalink   = "/" + postLink->text().toUTF8();
        postPtr = session_.add(newPost);
+       catPtr = session_.add(new Category);
+       catPtr.modify()->checkedcat = ss.str();
+       postPtr.modify()->categories.insert(catPtr);
        t.commit();
       }
       published = true;
@@ -86,6 +96,8 @@ void PostPad :: storePost(std::string postContentStr)
        postPtr.modify()->postName = postTitle->text().toUTF8();
        postPtr.modify()->postContent = postContentStr;
        postPtr.modify()->permalink = "/" + postLink->text().toUTF8();
+       catPtr.modify()->checkedcat = ss.str();
+       postPtr.modify()->categories.insert(catPtr);
        t.commit();
       }
     }
@@ -97,8 +109,8 @@ void PostPad :: getCategory()
           dbo::collection <dbo::ptr<Category> > cat_Ptr = session_.find<Category>();
           for(auto i: cat_Ptr)
           {
-                
-          checkbox = new WCheckBox (i->categoryname, this);
+                checkbox = new WCheckBox (i->categoryname, this);
+		checked_cat.push_back(checkbox);
           }
           T.commit();
         }

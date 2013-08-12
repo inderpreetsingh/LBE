@@ -35,7 +35,7 @@ class CategoryPannel :public WContainerWidget
   //!
   WAnchor *CategoryNames;
   //!  
-  CategoryCollection cat_pannel;
+  PostCollection cat_pannel;
   //!
   Session session_;
 };
